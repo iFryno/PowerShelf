@@ -55,6 +55,7 @@ while ($true) {
             }
             Start-Sleep 1
 
+            # Minimize ribbon
             Reg.exe add 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Ribbon' /v 'MinimizedStateTabletModeOff' /t REG_DWORD /d 1 /f *> $null
             Reg.exe add 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Ribbon' /v 'MinimizedStateTabletModeOn' /t REG_DWORD /d 1 /f *> $null
 
@@ -67,7 +68,7 @@ while ($true) {
             exit
         }
         2 {
-            # Disable legacy File Explorer ribbon
+            # Restore modern File Explorer ribbon
             Reg.exe delete 'HKCU\Software\Classes\CLSID\{2aa9162e-c906-4dd9-ad0b-3d24a8eef5a0}' /f *>$null
             Reg.exe delete 'HKCU\Software\Classes\CLSID\{6480100b-5a83-4d1e-9f69-8ae5a88e9a33}' /f *>$null
             Reg.exe delete 'HKCU\Software\Microsoft\Internet Explorer\Toolbar\ShellBrowser' /v 'ITBar7Layout' /f *>$null
