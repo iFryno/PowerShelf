@@ -7,7 +7,7 @@ $Host.UI.RawUI.BackgroundColor = 'Black'
 $Host.UI.RawUI.ForegroundColor = 'White'
 Clear-Host
 
-Write-Host "File Explorer`n"
+Write-Host "Explorer Ribbon`n"
 Write-Host '1. Legacy'
 Write-Host "2. Default`n"
 
@@ -23,7 +23,7 @@ while ($true) {
         1 {
             Clear-Host
 
-            # Enable legacy File Explorer ribbon
+            # Enable legacy Explorer ribbon
             Reg.exe add 'HKCU\Software\Classes\CLSID\{2aa9162e-c906-4dd9-ad0b-3d24a8eef5a0}' /ve /t REG_SZ /d 'CLSID_ItemsViewAdapter' /f *>$null
             Reg.exe add 'HKCU\Software\Classes\CLSID\{2aa9162e-c906-4dd9-ad0b-3d24a8eef5a0}\InProcServer32' /ve /t REG_SZ /d 'C:\Windows\System32\Windows.UI.FileExplorer.dll_' /f *>$null
             Reg.exe add 'HKCU\Software\Classes\CLSID\{2aa9162e-c906-4dd9-ad0b-3d24a8eef5a0}\InProcServer32' /v 'ThreadingModel' /t REG_SZ /d 'Apartment' /f *>$null
@@ -46,7 +46,7 @@ while ($true) {
             New-Item -Path 'HKCU:\Software\Microsoft\Internet Explorer\Toolbar\ShellBrowser' -Force | Out-Null
             Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Internet Explorer\Toolbar\ShellBrowser' -Name 'ITBar7Layout' -Value $ITBar7Layout -Type Binary -Force
 
-            # Initialize Explorer for ribbon settings
+            # Initialize Explorer for minimized ribbon
             Stop-Process -Force -Name explorer -ErrorAction SilentlyContinue
 
             Start-Process explorer.exe
@@ -55,7 +55,7 @@ while ($true) {
             }
             Start-Sleep 1
 
-            # Minimize ribbon
+            # Enable minimized ribbon
             Reg.exe add 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Ribbon' /v 'MinimizedStateTabletModeOff' /t REG_DWORD /d 1 /f *> $null
             Reg.exe add 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Ribbon' /v 'MinimizedStateTabletModeOn' /t REG_DWORD /d 1 /f *> $null
 
@@ -68,7 +68,7 @@ while ($true) {
             exit
         }
         2 {
-            # Restore modern File Explorer ribbon
+            # Disable legacy Explorer ribbon
             Reg.exe delete 'HKCU\Software\Classes\CLSID\{2aa9162e-c906-4dd9-ad0b-3d24a8eef5a0}' /f *>$null
             Reg.exe delete 'HKCU\Software\Classes\CLSID\{6480100b-5a83-4d1e-9f69-8ae5a88e9a33}' /f *>$null
             Reg.exe delete 'HKCU\Software\Microsoft\Internet Explorer\Toolbar\ShellBrowser' /v 'ITBar7Layout' /f *>$null
