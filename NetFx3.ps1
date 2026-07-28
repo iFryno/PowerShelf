@@ -30,7 +30,7 @@ if (-not $sourcePath -or -not (Test-Path $sourcePath)) {
     Write-Host "Error: Could not find a drive containing \sources\sxs. Make sure the installation media is connected.`n" -ForegroundColor Red
     Write-Host 'Press any key to exit...' -NoNewline
     $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
-    exit
+    return
 }
 
 # Install NetFx3
@@ -39,5 +39,3 @@ dism /online /enable-feature /featurename:NetFx3 /all /source:$sourcePath /limit
 
 # Open optional features
 Start-Process optionalfeatures.exe
-
-exit
