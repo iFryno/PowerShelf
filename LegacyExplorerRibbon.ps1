@@ -11,13 +11,9 @@ Write-Host "Explorer Ribbon`n"
 Write-Host '1. Legacy'
 Write-Host "2. Default`n"
 
-while ($true) {
-    $choice = Read-Host ' '
-
-    if ($choice -notmatch '^[1-2]$') {
-        Write-Host "Invalid option.`n" -ForegroundColor Red
-        continue
-    }
+$break = $false
+do {
+    $choice = ($Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')).Character
 
     switch ($choice) {
         1 {
@@ -65,9 +61,11 @@ while ($true) {
             # Open Explorer
             Start-Process explorer.exe
 
-            exit
+            $break = $true
         }
         2 {
+            Clear-Host
+
             # Disable legacy Explorer ribbon
             Reg.exe delete 'HKCU\Software\Classes\CLSID\{2aa9162e-c906-4dd9-ad0b-3d24a8eef5a0}' /f *>$null
             Reg.exe delete 'HKCU\Software\Classes\CLSID\{6480100b-5a83-4d1e-9f69-8ae5a88e9a33}' /f *>$null
@@ -81,7 +79,10 @@ while ($true) {
             # Open Explorer
             Start-Process explorer.exe
 
-            exit
+            $break = $true
+        }
+        default {
+            Write-Host "Invalid option.`n" -ForegroundColor Red
         }
     }
-}
+} while (!$break)
