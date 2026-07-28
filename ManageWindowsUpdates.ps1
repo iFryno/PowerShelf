@@ -15,16 +15,14 @@ Write-Host "Driver Updates`n"
 Write-Host '4. Disable'
 Write-Host "5. Enable`n"
 
-while ($true) {
-    $choice = Read-Host ' '
-
-    if ($choice -notmatch '^[1-5]$') {
-        Write-Host "Invalid option.`n" -ForegroundColor Red
-        continue
-    }
+$break = $false
+do {
+    $choice = ($Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')).Character
 
     switch ($choice) {
         1 {
+            Clear-Host
+			
             $today = (Get-Date).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
             $pause = (Get-Date).AddDays(365).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ssZ')
 
@@ -39,7 +37,7 @@ while ($true) {
             # Open Windows Update page
             Start-Process ms-settings:windowsupdate
 
-            exit
+            $break = $true
         }
         2 {
             Clear-Host
@@ -65,7 +63,7 @@ while ($true) {
             Write-Host "Restart to apply.`n" -ForegroundColor Yellow
             Write-Host 'Press any key to exit...' -NoNewline
             $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
-            exit
+            $break = $true
         }
         3 {
             Clear-Host
@@ -91,9 +89,11 @@ while ($true) {
             Write-Host "Restart to apply.`n" -ForegroundColor Yellow
             Write-Host 'Press any key to exit...' -NoNewline
             $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
-            exit
+            $break = $true
         }
         4 {
+            Clear-Host
+
             # Disable driver updates
             Reg.exe add 'HKLM\Software\Policies\Microsoft\Windows\DriverSearching' /v 'SearchOrderConfig' /t REG_DWORD /d '0' /f *>$null
             Reg.exe add 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU' /v 'EnableFeaturedSoftware' /t REG_DWORD /d '0' /f *>$null
@@ -105,13 +105,14 @@ while ($true) {
             Reg.exe add 'HKLM\Software\Policies\Microsoft\Windows\DeviceInstall\Settings' /v 'DisableSendGenericDriverNotFoundToWER' /t REG_DWORD /d '1' /f *>$null
             Reg.exe add 'HKLM\Software\Policies\Microsoft\Windows\DeviceInstall\Settings' /v 'DisableSendRequestAdditionalSoftwareToWER' /t REG_DWORD /d '1' /f *>$null
 
-            Clear-Host
             Write-Host "Restart to apply.`n" -ForegroundColor Yellow
             Write-Host 'Press any key to exit...' -NoNewline
             $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
-            exit
+            $break = $true
         }
         5 {
+            Clear-Host
+
             # Enable driver updates
             Reg.exe delete 'HKLM\Software\Policies\Microsoft\Windows\DriverSearching' /v 'SearchOrderConfig' /f *>$null
             Reg.exe delete 'HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU' /v 'EnableFeaturedSoftware' /f *>$null
@@ -123,11 +124,13 @@ while ($true) {
             Reg.exe delete 'HKLM\Software\Policies\Microsoft\Windows\DeviceInstall\Settings' /v 'DisableSendGenericDriverNotFoundToWER' /f *>$null
             Reg.exe delete 'HKLM\Software\Policies\Microsoft\Windows\DeviceInstall\Settings' /v 'DisableSendRequestAdditionalSoftwareToWER' /f *>$null
 
-            Clear-Host
             Write-Host "Restart to apply.`n" -ForegroundColor Yellow
             Write-Host 'Press any key to exit...' -NoNewline
             $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
-            exit
+            $break = $true
+        }
+        default {
+            Write-Host "Invalid option.`n" -ForegroundColor Red
         }
     }
-}
+} while (!$break)
