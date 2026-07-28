@@ -11,16 +11,14 @@ Write-Host "Start Menu Version`n"
 Write-Host '1. 25H2'
 Write-Host "2. 24H2`n"
 
-while ($true) {
-    $choice = Read-Host ' '
-
-    if ($choice -notmatch '^[1-2]$') {
-        Write-Host "Invalid option.`n" -ForegroundColor Red
-        continue
-    }
+$break = $false
+do {
+    $choice = ($Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')).Character
 
     switch ($choice) {
         1 {
+            Clear-Host
+
             # Set Start Menu version to 25H2
             Reg.exe add 'HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\14\2792562829' /v 'EnabledState' /t REG_DWORD /d '2' /f *>$null
             Reg.exe add 'HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\14\3036241548' /v 'EnabledState' /t REG_DWORD /d '2' /f *>$null
@@ -30,13 +28,14 @@ while ($true) {
             # Set Start Menu apps view to list
             Reg.exe add 'HKCU\Software\Microsoft\Windows\CurrentVersion\Start' /v 'AllAppsViewMode' /t REG_DWORD /d '2' /f *>$null
 
-            Clear-Host
             Write-Host "Restart to apply.`n" -ForegroundColor Yellow
             Write-Host 'Press any key to exit...' -NoNewline
             $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
-            exit
+            $break = $true
         }
         2 {
+            Clear-Host
+
             # Set Start Menu version to 24H2
             Reg.exe add 'HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\14\2792562829' /v 'EnabledState' /t REG_DWORD /d '0' /f *>$null
             Reg.exe add 'HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\14\3036241548' /v 'EnabledState' /t REG_DWORD /d '0' /f *>$null
@@ -46,11 +45,13 @@ while ($true) {
             # Reset Start Menu apps view
             Reg.exe delete 'HKCU\Software\Microsoft\Windows\CurrentVersion\Start' /v 'AllAppsViewMode' /f *>$null
 
-            Clear-Host
             Write-Host "Restart to apply.`n" -ForegroundColor Yellow
             Write-Host 'Press any key to exit...' -NoNewline
             $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
-            exit
+            $break = $true
+        }
+        default {
+            Write-Host "Invalid option.`n" -ForegroundColor Red
         }
     }
-}
+} while (!$break)
