@@ -11,16 +11,14 @@ Write-Host "Digital Markets Act`n"
 Write-Host '1. Enable'
 Write-Host "2. Disable`n"
 
-while ($true) {
-    $choice = Read-Host ' '
-
-    if ($choice -notmatch '^[1-2]$') {
-        Write-Host "Invalid option.`n" -ForegroundColor Red
-        continue
-    }
+$break = $false
+do {
+    $choice = ($Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')).Character
 
     switch ($choice) {
         1 {
+            Clear-Host
+
             # Create reg1.exe to bypass UCPD (credit: zoicware)
             Copy-Item (Get-Command reg.exe).Source .\reg1.exe -Force -EA 0
 
@@ -30,13 +28,14 @@ while ($true) {
             # Remove reg1.exe
             Remove-Item .\reg1.exe -Force -EA 0
 
-            Clear-Host
             Write-Host "Restart to apply.`n" -ForegroundColor Yellow
             Write-Host 'Press any key to exit...' -NoNewline
             $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
-            exit
+            $break = $true
         }
         2 {
+            Clear-Host
+
             # Get original device setup region
             $Nation = Get-ItemPropertyValue -Path 'Registry::HKEY_USERS\.DEFAULT\Control Panel\International\Geo' -Name 'Nation'
 
@@ -49,11 +48,13 @@ while ($true) {
             # Remove reg1.exe
             Remove-Item .\reg1.exe -Force -EA 0
 
-            Clear-Host
             Write-Host "Restart to apply.`n" -ForegroundColor Yellow
             Write-Host 'Press any key to exit...' -NoNewline
             $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
-            exit
+            $break = $true
+        }
+        default {
+            Write-Host "Invalid option.`n" -ForegroundColor Red
         }
     }
-}
+} while (!$break)
