@@ -11,16 +11,14 @@ Write-Host "Legacy Settings`n"
 Write-Host '1. Add'
 Write-Host "2. Remove`n"
 
-while ($true) {
-    $choice = Read-Host ' '
-
-    if ($choice -notmatch '^[1-2]$') {
-        Write-Host "Invalid option.`n" -ForegroundColor Red
-        continue
-    }
+$break = $false
+do {
+    $choice = ($Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')).Character
 
     switch ($choice) {
         1 {
+            Clear-Host
+
             # Add legacy settings to desktop context menu
             Reg.exe add 'HKCR\DesktopBackground\Shell\Personalization' /v 'Icon' /t REG_SZ /d 'shell32.dll,-137' /f *>$null
             Reg.exe add 'HKCR\DesktopBackground\Shell\Personalization' /v 'MUIVerb' /t REG_SZ /d 'Legacy settings' /f *>$null
@@ -42,21 +40,24 @@ while ($true) {
             Reg.exe add 'HKCR\DesktopBackground\Shell\Personalization\shell\005flyout' /v 'MUIVerb' /t REG_SZ /d 'Desktop Icon Settings' /f *>$null
             Reg.exe add 'HKCR\DesktopBackground\Shell\Personalization\shell\005flyout\command' /ve /t REG_SZ /d 'rundll32.exe shell32.dll,Control_RunDLL desk.cpl,,0' /f *>$null
 
-            Clear-Host
             Write-Host "Legacy Settings added.`n" -ForegroundColor Green
             Write-Host 'Press any key to exit...' -NoNewline
             $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
-            exit
+            $break = $true
         }
         2 {
+            Clear-Host
+
             # Remove legacy settings from desktop context menu
             Reg.exe delete 'HKCR\DesktopBackground\Shell\Personalization' /f *>$null
 
-            Clear-Host
             Write-Host "Legacy Settings removed.`n" -ForegroundColor Green
             Write-Host 'Press any key to exit...' -NoNewline
             $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
-            exit
+            $break = $true
+        }
+        default {
+            Write-Host "Invalid option.`n" -ForegroundColor Red
         }
     }
-}
+} while (!$break)
