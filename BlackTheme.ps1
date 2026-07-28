@@ -11,13 +11,9 @@ Write-Host "Windows Theme`n"
 Write-Host '1. Black'
 Write-Host "2. Default`n"
 
-while ($true) {
-    $choice = Read-Host ' '
-
-    if ($choice -notmatch '^[1-2]$') {
-        Write-Host "Invalid option.`n" -ForegroundColor Red
-        continue
-    }
+$break = $false
+do {
+    $choice = ($Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')).Character
 
     switch ($choice) {
         1 {
@@ -97,7 +93,7 @@ while ($true) {
             Write-Host "Restart to apply.`n" -ForegroundColor Yellow
             Write-Host 'Press any key to exit...' -NoNewline
             $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
-            exit
+            $break = $true
         }
         2 {
             Clear-Host
@@ -159,7 +155,10 @@ while ($true) {
             Write-Host "Restart to apply.`n" -ForegroundColor Yellow
             Write-Host 'Press any key to exit...' -NoNewline
             $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
-            exit
+            $break = $true
+        }
+        default {
+            Write-Host "Invalid option.`n" -ForegroundColor Red
         }
     }
-}
+} while (!$break)
