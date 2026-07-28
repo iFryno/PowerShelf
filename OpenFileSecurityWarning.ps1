@@ -11,38 +11,39 @@ Write-Host "Open File Security Warning`n"
 Write-Host '1. Disable'
 Write-Host "2. Enable`n"
 
-while ($true) {
-    $choice = Read-Host ' '
-
-    if ($choice -notmatch '^[1-2]$') {
-        Write-Host "Invalid option.`n" -ForegroundColor Red
-        continue
-    }
+$break = $false
+do {
+    $choice = ($Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')).Character
 
     switch ($choice) {
         1 {
+            Clear-Host
+
             # Disable open file security warning
             Reg.exe add 'HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3' /v '1806' /t REG_DWORD /d '0' /f *>$null
             Reg.exe add 'HKLM\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3' /v '1806' /t REG_DWORD /d '0' /f *>$null
             Reg.exe add 'HKLM\SOFTWARE\Policies\Microsoft\Internet Explorer\Security' /v 'DisableSecuritySettingsCheck' /t REG_DWORD /d '1' /f *>$null
 
-            Clear-Host
             Write-Host "Restart to apply.`n" -ForegroundColor Yellow
             Write-Host 'Press any key to exit...' -NoNewline
             $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
-            exit
+            $break = $true
         }
         2 {
+            Clear-Host
+
             # Enable open file security warning
             Reg.exe delete 'HKCU\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3' /v '1806' /f *>$null
             Reg.exe delete 'HKLM\SOFTWARE\Policies\Microsoft\Internet Explorer\Security' /v 'DisableSecuritySettingsCheck' /f *>$null
             Reg.exe add 'HKLM\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Zones\3' /v '1806' /t REG_DWORD /d '1' /f *>$null
 
-            Clear-Host
             Write-Host "Restart to apply.`n" -ForegroundColor Yellow
             Write-Host 'Press any key to exit...' -NoNewline
             $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
-            exit
+            $break = $true
+        }
+        default {
+            Write-Host "Invalid option.`n" -ForegroundColor Red
         }
     }
-}
+} while (!$break)
