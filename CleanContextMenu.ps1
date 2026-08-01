@@ -243,6 +243,21 @@ do {
             ; Remove turn on BitLocker
             [HKEY_CLASSES_ROOT\Drive\shell\encrypt-bde-elev]
             "LegacyDisable"=""
+
+            ; Remove explore background
+            [HKEY_CURRENT_USER\Software\Classes\DesktopBackground\shell\.SpotlightLearnMore]
+            "ProgrammaticAccessOnly"=""
+
+            ; Remove next desktop background
+            [HKEY_CURRENT_USER\Software\Classes\DesktopBackground\shell\.SpotlightNextImage]
+            "ProgrammaticAccessOnly"=""
+
+            [-HKEY_CLASSES_ROOT\DesktopBackground\shellex\ContextMenuHandlers\DesktopSlideshow]
+
+            ; Remove ask Copilot
+            [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked]
+            "{CB3B0003-8088-4EDE-8769-8B354AB2FF8C}"=""
+            "{ED215C26-C810-49CE-929E-31D7E83A82E9}"=""
 '@ -replace '(?m)^ {12}')
 
             $regPath = Join-Path $env:SystemRoot 'Temp\CleanContextMenu.reg'
@@ -780,6 +795,22 @@ do {
             ; Restore turn on BitLocker
             [HKEY_CLASSES_ROOT\Drive\shell\encrypt-bde-elev]
             "LegacyDisable"=-
+
+            ; Restore explore background
+            [HKEY_CURRENT_USER\Software\Classes\DesktopBackground\shell\.SpotlightLearnMore]
+            "ProgrammaticAccessOnly"=-
+
+            ; Restore next desktop background
+            [HKEY_CURRENT_USER\Software\Classes\DesktopBackground\shell\.SpotlightNextImage]
+            "ProgrammaticAccessOnly"=-
+
+            [HKEY_CLASSES_ROOT\DesktopBackground\shellex\ContextMenuHandlers\DesktopSlideshow]
+            @="{0bf754aa-c967-445c-ab3d-d8fda9bae7ef}"
+
+            ; Restore ask Copilot
+            [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked]
+            "{CB3B0003-8088-4EDE-8769-8B354AB2FF8C}"=-
+            "{ED215C26-C810-49CE-929E-31D7E83A82E9}"=-
 '@ -replace '(?m)^ {12}')
 
             $regPath = Join-Path $env:SystemRoot 'Temp\DefaultContextMenu.reg'
