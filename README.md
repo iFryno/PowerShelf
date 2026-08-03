@@ -16,7 +16,7 @@
 - **[Manage Windows Updates](ManageWindowsUpdates.ps1)** - Pauses Windows updates for 1 year, disables them entirely or disables driver updates.
 - **[NetFx3](NetFx3.ps1)** - Installs .NET Framework 3.5 instantly using local installation media instead of Windows Update servers, avoiding slow download times.
 - **[Open File Security Warning](OpenFileSecurityWarning.ps1)** - Removes the security warning and automatic file blocking for downloaded files.
-- **[Start Menu Version](StartMenuVersion.ps1)** - Activates the new 25H2 Start Menu or reverts to the 24H2 version on supported Windows 11 26200 builds.
+- **[Start Menu Version](StartMenuVersion.ps1)** - Activates the new 25H2 Start menu or reverts to the 24H2 version on supported Windows 11 26200 builds.
 - **[User Account Control](UserAccountControl.ps1)** - Disables the UAC elevation prompt for administrative tasks.
 
 ---
