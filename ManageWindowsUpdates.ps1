@@ -43,7 +43,7 @@ do {
             Clear-Host
             Write-Host 'Disabling...' -NoNewline
 
-            # Disable Windows updates
+            # Disable Windows Update
             Reg.exe add 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate' /v 'WUServer' /t REG_SZ /d 'https://blocked.invalid/' /f *>$null
             Reg.exe add 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate' /v 'WUStatusServer' /t REG_SZ /d 'https://blocked.invalid/' /f *>$null
             Reg.exe add 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate' /v 'UpdateServiceUrlAlternate' /t REG_SZ /d 'https://blocked.invalid/' /f *>$null
@@ -69,7 +69,7 @@ do {
             Clear-Host
             Write-Host 'Enabling...' -NoNewline
 
-            # Enable Windows updates
+            # Enable Windows Update
             Reg.exe delete 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate' /v 'WUServer' /f *>$null
             Reg.exe delete 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate' /v 'WUStatusServer' /f *>$null
             Reg.exe delete 'HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate' /v 'UpdateServiceUrlAlternate' /f *>$null
