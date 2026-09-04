@@ -52,8 +52,8 @@ do {
             Start-Sleep 1
 
             # Enable minimized ribbon
-            Reg.exe add 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Ribbon' /v 'MinimizedStateTabletModeOff' /t REG_DWORD /d 1 /f *> $null
-            Reg.exe add 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Ribbon' /v 'MinimizedStateTabletModeOn' /t REG_DWORD /d 1 /f *> $null
+            Reg.exe add 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Ribbon' /v 'MinimizedStateTabletModeOff' /t REG_DWORD /d 1 /f *>$null
+            Reg.exe add 'HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Ribbon' /v 'MinimizedStateTabletModeOn' /t REG_DWORD /d 1 /f *>$null
 
             # Restart Explorer
             Stop-Process -Force -Name explorer -ErrorAction SilentlyContinue
