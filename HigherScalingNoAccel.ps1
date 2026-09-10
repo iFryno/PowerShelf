@@ -7,6 +7,9 @@ $Host.UI.RawUI.BackgroundColor = 'Black'
 $Host.UI.RawUI.ForegroundColor = 'White'
 Clear-Host
 
+# EPP curves below use MarkC's Mouse Acceleration Fix.
+# See: https://donewmouseaccel.blogspot.com/
+
 Write-Host "Higher Scaling No Accel`n"
 Write-Host '1. 100%'
 Write-Host '2. 125%'
@@ -28,14 +31,14 @@ do {
             $regContent = (@'
             Windows Registry Editor Version 5.00
 
-            ; Set pointer speed to 6/11
+            ; Set pointer speed to 10
             [HKEY_CURRENT_USER\Control Panel\Mouse]
             "MouseSensitivity"="10"
 
             [HKEY_USERS\.DEFAULT\Control Panel\Mouse]
             "MouseSensitivity"="10"
 
-            ; Disable enhance pointer precision
+            ; Disable enhance pointer precision (EPP)
             [HKEY_CURRENT_USER\Control Panel\Mouse]
             "MouseSpeed"="0"
             "MouseThreshold1"="0"
@@ -46,7 +49,7 @@ do {
             "MouseThreshold1"="0"
             "MouseThreshold2"="0"
 
-            ; Set EPP curve for 100% scaling with no acceleration (credit: MarkC)
+            ; Set EPP curve for 100% scaling with no acceleration
             [HKEY_CURRENT_USER\Control Panel\Mouse]
             "SmoothMouseXCurve"=hex:\
             00,00,00,00,00,00,00,00,\
@@ -106,14 +109,14 @@ do {
             $regContent = (@'
             Windows Registry Editor Version 5.00
 
-            ; Set pointer speed to 6/11
+            ; Set pointer speed to 10
             [HKEY_CURRENT_USER\Control Panel\Mouse]
             "MouseSensitivity"="10"
 
             [HKEY_USERS\.DEFAULT\Control Panel\Mouse]
             "MouseSensitivity"="10"
 
-            ; Enable enhance pointer precision
+            ; Enable enhance pointer precision (EPP)
             [HKEY_CURRENT_USER\Control Panel\Mouse]
             "MouseSpeed"="1"
             "MouseThreshold1"="6"
@@ -184,14 +187,14 @@ do {
             $regContent = (@'
             Windows Registry Editor Version 5.00
 
-            ; Set pointer speed to 6/11
+            ; Set pointer speed to 10
             [HKEY_CURRENT_USER\Control Panel\Mouse]
             "MouseSensitivity"="10"
 
             [HKEY_USERS\.DEFAULT\Control Panel\Mouse]
             "MouseSensitivity"="10"
 
-            ; Enable enhance pointer precision
+            ; Enable enhance pointer precision (EPP)
             [HKEY_CURRENT_USER\Control Panel\Mouse]
             "MouseSpeed"="1"
             "MouseThreshold1"="6"
@@ -262,14 +265,14 @@ do {
             $regContent = (@'
             Windows Registry Editor Version 5.00
 
-            ; Set pointer speed to 6/11
+            ; Set pointer speed to 10
             [HKEY_CURRENT_USER\Control Panel\Mouse]
             "MouseSensitivity"="10"
 
             [HKEY_USERS\.DEFAULT\Control Panel\Mouse]
             "MouseSensitivity"="10"
 
-            ; Enable enhance pointer precision
+            ; Enable enhance pointer precision (EPP)
             [HKEY_CURRENT_USER\Control Panel\Mouse]
             "MouseSpeed"="1"
             "MouseThreshold1"="6"
@@ -340,14 +343,14 @@ do {
             $regContent = (@'
             Windows Registry Editor Version 5.00
 
-            ; Set pointer speed to 6/11
+            ; Set pointer speed to 10
             [HKEY_CURRENT_USER\Control Panel\Mouse]
             "MouseSensitivity"="10"
 
             [HKEY_USERS\.DEFAULT\Control Panel\Mouse]
             "MouseSensitivity"="10"
 
-            ; Enable enhance pointer precision
+            ; Enable enhance pointer precision (EPP)
             [HKEY_CURRENT_USER\Control Panel\Mouse]
             "MouseSpeed"="1"
             "MouseThreshold1"="6"
@@ -418,14 +421,14 @@ do {
             $regContent = (@'
             Windows Registry Editor Version 5.00
 
-            ; Set pointer speed to 6/11
+            ; Set pointer speed to 10
             [HKEY_CURRENT_USER\Control Panel\Mouse]
             "MouseSensitivity"="10"
 
             [HKEY_USERS\.DEFAULT\Control Panel\Mouse]
             "MouseSensitivity"="10"
 
-            ; Enable enhance pointer precision
+            ; Enable enhance pointer precision (EPP)
             [HKEY_CURRENT_USER\Control Panel\Mouse]
             "MouseSpeed"="1"
             "MouseThreshold1"="6"
@@ -496,14 +499,15 @@ do {
             $regContent = (@'
             Windows Registry Editor Version 5.00
 
-            ; Set pointer speed to 6/11
+            ; Set pointer speed to 10
             [HKEY_CURRENT_USER\Control Panel\Mouse]
             "MouseSensitivity"="10"
 
             [HKEY_USERS\.DEFAULT\Control Panel\Mouse]
             "MouseSensitivity"="10"
 
-            ; Disable enhance pointer precision (should not be on by default)
+            ; Disable enhance pointer precision (EPP)
+            ; Windows shouldn't enable this by default
             [HKEY_CURRENT_USER\Control Panel\Mouse]
             "MouseSpeed"="0"
             "MouseThreshold1"="0"
