@@ -34,8 +34,8 @@ if (-not $sourcePath -or -not (Test-Path $sourcePath)) {
 }
 
 # Install NetFx3
-Write-Host 'Installing NetFx3...' -NoNewline
-DISM /Online /Enable-Feature /FeatureName:NetFx3 /All /Source:$sourcePath /LimitAccess | Out-Null
+Write-Host 'Installing NetFx3...'
+DISM /Online /Enable-Feature /FeatureName:NetFx3 /All /Source:$sourcePath /LimitAccess
 
 # Open optional features
 Start-Process OptionalFeatures.exe
