@@ -258,7 +258,7 @@ do {
             [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked]
             "{CB3B0003-8088-4EDE-8769-8B354AB2FF8C}"=""
             "{ED215C26-C810-49CE-929E-31D7E83A82E9}"=""
-'@ -replace '(?m)^ {12}')
+'@ -replace '(?m)^[ \t]+')
 
             $regPath = Join-Path $env:SystemRoot 'Temp\CleanContextMenu.reg'
             Set-Content -Path $regPath -Value $regContent -Force
@@ -811,7 +811,7 @@ do {
             [HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked]
             "{CB3B0003-8088-4EDE-8769-8B354AB2FF8C}"=-
             "{ED215C26-C810-49CE-929E-31D7E83A82E9}"=-
-'@ -replace '(?m)^ {12}')
+'@ -replace '(?m)^[ \t]+')
 
             $regPath = Join-Path $env:SystemRoot 'Temp\DefaultContextMenu.reg'
             Set-Content -Path $regPath -Value $regContent -Force
