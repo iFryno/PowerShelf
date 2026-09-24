@@ -60,7 +60,7 @@ do {
             ; Enable show accent color on Start and taskbar
             [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize]
             "ColorPrevalence"=dword:00000001
-'@ -replace '(?m)^ {12}')
+'@ -replace '(?m)^[ \t]+')
 
             $regPath = Join-Path $env:SystemRoot 'Temp\BlackTheme.reg'
             Set-Content -Path $regPath -Value $regContent -Force
@@ -135,7 +135,7 @@ do {
             ; Disable show accent color on Start and taskbar
             [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize]
             "ColorPrevalence"=dword:00000000
-'@ -replace '(?m)^ {12}')
+'@ -replace '(?m)^[ \t]+')
 
             $regPath = Join-Path $env:SystemRoot 'Temp\DefaultTheme.reg'
             Set-Content -Path $regPath -Value $regContent -Force
