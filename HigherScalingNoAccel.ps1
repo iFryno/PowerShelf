@@ -89,7 +89,7 @@ do {
             ; Disable fix scaling for apps
             [HKEY_CURRENT_USER\Control Panel\Desktop]
             "EnablePerProcessSystemDPI"=dword:00000000
-'@ -replace '(?m)^ {12}')
+'@ -replace '(?m)^[ \t]+')
 
             $regPath = Join-Path $env:SystemRoot 'Temp\100%.reg'
             Set-Content -Path $regPath -Value $regContent -Force
@@ -167,7 +167,7 @@ do {
             ; Enable fix scaling for apps
             [HKEY_CURRENT_USER\Control Panel\Desktop]
             "EnablePerProcessSystemDPI"=dword:00000001
-'@ -replace '(?m)^ {12}')
+'@ -replace '(?m)^[ \t]+')
 
             $regPath = Join-Path $env:SystemRoot 'Temp\125%.reg'
             Set-Content -Path $regPath -Value $regContent -Force
@@ -245,7 +245,7 @@ do {
             ; Enable fix scaling for apps
             [HKEY_CURRENT_USER\Control Panel\Desktop]
             "EnablePerProcessSystemDPI"=dword:00000001
-'@ -replace '(?m)^ {12}')
+'@ -replace '(?m)^[ \t]+')
 
             $regPath = Join-Path $env:SystemRoot 'Temp\150%.reg'
             Set-Content -Path $regPath -Value $regContent -Force
@@ -323,7 +323,7 @@ do {
             ; Enable fix scaling for apps
             [HKEY_CURRENT_USER\Control Panel\Desktop]
             "EnablePerProcessSystemDPI"=dword:00000001
-'@ -replace '(?m)^ {12}')
+'@ -replace '(?m)^[ \t]+')
 
             $regPath = Join-Path $env:SystemRoot 'Temp\175%.reg'
             Set-Content -Path $regPath -Value $regContent -Force
@@ -401,7 +401,7 @@ do {
             ; Enable fix scaling for apps
             [HKEY_CURRENT_USER\Control Panel\Desktop]
             "EnablePerProcessSystemDPI"=dword:00000001
-'@ -replace '(?m)^ {12}')
+'@ -replace '(?m)^[ \t]+')
 
             $regPath = Join-Path $env:SystemRoot 'Temp\200%.reg'
             Set-Content -Path $regPath -Value $regContent -Force
@@ -479,7 +479,7 @@ do {
             ; Enable fix scaling for apps
             [HKEY_CURRENT_USER\Control Panel\Desktop]
             "EnablePerProcessSystemDPI"=dword:00000001
-'@ -replace '(?m)^ {12}')
+'@ -replace '(?m)^[ \t]+')
 
             $regPath = Join-Path $env:SystemRoot 'Temp\225%.reg'
             Set-Content -Path $regPath -Value $regContent -Force
@@ -558,7 +558,7 @@ do {
             ; Reset fix scaling for apps
             [HKEY_CURRENT_USER\Control Panel\Desktop]
             "EnablePerProcessSystemDPI"=-
-'@ -replace '(?m)^ {12}')
+'@ -replace '(?m)^[ \t]+')
 
             $regPath = Join-Path $env:SystemRoot 'Temp\Default.reg'
             Set-Content -Path $regPath -Value $regContent -Force
