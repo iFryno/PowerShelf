@@ -93,7 +93,7 @@ do {
 
             $regPath = Join-Path $env:SystemRoot 'Temp\100%.reg'
             Set-Content -Path $regPath -Value $regContent -Force
-            Start-Process -Wait 'regedit.exe' -ArgumentList "/S $regPath" -WindowStyle Hidden
+            Start-Process -FilePath 'regedit.exe' -ArgumentList "/S $regPath" -Wait -WindowStyle Hidden
             Remove-Item $regPath -Force
 
             Clear-Host
@@ -171,7 +171,7 @@ do {
 
             $regPath = Join-Path $env:SystemRoot 'Temp\125%.reg'
             Set-Content -Path $regPath -Value $regContent -Force
-            Start-Process -Wait 'regedit.exe' -ArgumentList "/S $regPath" -WindowStyle Hidden
+            Start-Process -FilePath 'regedit.exe' -ArgumentList "/S $regPath" -Wait -WindowStyle Hidden
             Remove-Item $regPath -Force
 
             Clear-Host
@@ -249,7 +249,7 @@ do {
 
             $regPath = Join-Path $env:SystemRoot 'Temp\150%.reg'
             Set-Content -Path $regPath -Value $regContent -Force
-            Start-Process -Wait 'regedit.exe' -ArgumentList "/S $regPath" -WindowStyle Hidden
+            Start-Process -FilePath 'regedit.exe' -ArgumentList "/S $regPath" -Wait -WindowStyle Hidden
             Remove-Item $regPath -Force
 
             Clear-Host
@@ -327,7 +327,7 @@ do {
 
             $regPath = Join-Path $env:SystemRoot 'Temp\175%.reg'
             Set-Content -Path $regPath -Value $regContent -Force
-            Start-Process -Wait 'regedit.exe' -ArgumentList "/S $regPath" -WindowStyle Hidden
+            Start-Process -FilePath 'regedit.exe' -ArgumentList "/S $regPath" -Wait -WindowStyle Hidden
             Remove-Item $regPath -Force
 
             Clear-Host
@@ -405,7 +405,7 @@ do {
 
             $regPath = Join-Path $env:SystemRoot 'Temp\200%.reg'
             Set-Content -Path $regPath -Value $regContent -Force
-            Start-Process -Wait 'regedit.exe' -ArgumentList "/S $regPath" -WindowStyle Hidden
+            Start-Process -FilePath 'regedit.exe' -ArgumentList "/S $regPath" -Wait -WindowStyle Hidden
             Remove-Item $regPath -Force
 
             Clear-Host
@@ -483,7 +483,7 @@ do {
 
             $regPath = Join-Path $env:SystemRoot 'Temp\225%.reg'
             Set-Content -Path $regPath -Value $regContent -Force
-            Start-Process -Wait 'regedit.exe' -ArgumentList "/S $regPath" -WindowStyle Hidden
+            Start-Process -FilePath 'regedit.exe' -ArgumentList "/S $regPath" -Wait -WindowStyle Hidden
             Remove-Item $regPath -Force
 
             Clear-Host
@@ -562,7 +562,7 @@ do {
 
             $regPath = Join-Path $env:SystemRoot 'Temp\Default.reg'
             Set-Content -Path $regPath -Value $regContent -Force
-            Start-Process -Wait 'regedit.exe' -ArgumentList "/S $regPath" -WindowStyle Hidden
+            Start-Process -FilePath 'regedit.exe' -ArgumentList "/S $regPath" -Wait -WindowStyle Hidden
             Remove-Item $regPath -Force
 
             Clear-Host
