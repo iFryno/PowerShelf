@@ -64,7 +64,7 @@ do {
 
             $regPath = Join-Path $env:SystemRoot 'Temp\BlackTheme.reg'
             Set-Content -Path $regPath -Value $regContent -Force
-            Start-Process -Wait 'regedit.exe' -ArgumentList "/S $regPath" -WindowStyle Hidden
+            Start-Process -FilePath 'regedit.exe' -ArgumentList "/S $regPath" -Wait -WindowStyle Hidden
             Remove-Item $regPath -Force
 
             # Create black image for the lock screen
@@ -75,7 +75,7 @@ do {
             $screenHeight = [System.Windows.Forms.SystemInformation]::PrimaryMonitorSize.Height
             $imagePath = 'C:\Windows\Black.png'
 
-            $bitmap = New-Object System.Drawing.Bitmap $screenWidth, $screenHeight
+            $bitmap = New-Object System.Drawing.Bitmap -ArgumentList $screenWidth, $screenHeight
             $graphics = [System.Drawing.Graphics]::FromImage($bitmap)
             $graphics.FillRectangle([System.Drawing.Brushes]::Black, 0, 0, $bitmap.Width, $bitmap.Height)
             $graphics.Dispose()
@@ -139,7 +139,7 @@ do {
 
             $regPath = Join-Path $env:SystemRoot 'Temp\DefaultTheme.reg'
             Set-Content -Path $regPath -Value $regContent -Force
-            Start-Process -Wait 'regedit.exe' -ArgumentList "/S $regPath" -WindowStyle Hidden
+            Start-Process -FilePath 'regedit.exe' -ArgumentList "/S $regPath" -Wait -WindowStyle Hidden
             Remove-Item $regPath -Force
 
             # Delete black image
