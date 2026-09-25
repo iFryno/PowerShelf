@@ -262,7 +262,7 @@ do {
 
             $regPath = Join-Path $env:SystemRoot 'Temp\CleanContextMenu.reg'
             Set-Content -Path $regPath -Value $regContent -Force
-            Start-Process -Wait 'regedit.exe' -ArgumentList "/S $regPath" -WindowStyle Hidden
+            Start-Process -FilePath 'regedit.exe' -ArgumentList "/S $regPath" -Wait -WindowStyle Hidden
             Remove-Item $regPath -Force
 
             Clear-Host
@@ -815,7 +815,7 @@ do {
 
             $regPath = Join-Path $env:SystemRoot 'Temp\DefaultContextMenu.reg'
             Set-Content -Path $regPath -Value $regContent -Force
-            Start-Process -Wait 'regedit.exe' -ArgumentList "/S $regPath" -WindowStyle Hidden
+            Start-Process -FilePath 'regedit.exe' -ArgumentList "/S $regPath" -Wait -WindowStyle Hidden
             Remove-Item $regPath -Force
 
             Clear-Host
