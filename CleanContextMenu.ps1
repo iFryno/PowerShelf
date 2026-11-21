@@ -27,6 +27,9 @@ do {
             [HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32]
             @=""
 
+            [HKEY_CURRENT_USER\Software\Classes\CLSID\{51668040-5e31-4023-bbe3-149163bd80f1}\InprocServer32]
+            @=""
+
             ; Remove add to favorites
             [-HKEY_CLASSES_ROOT\*\shell\pintohomefile]
 
