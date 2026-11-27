@@ -284,6 +284,8 @@ do {
             ; Restore modern context menu
             [-HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}]
 
+            [-HKEY_CURRENT_USER\Software\Classes\CLSID\{51668040-5e31-4023-bbe3-149163bd80f1}]
+
             ; Restore add to favorites
             [HKEY_CLASSES_ROOT\*\shell\pintohomefile]
             "CommandStateHandler"="{b455f46e-e4af-4035-b0a4-cf18d2f6f28e}"
